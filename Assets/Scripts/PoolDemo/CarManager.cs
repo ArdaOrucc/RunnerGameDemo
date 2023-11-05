@@ -17,7 +17,7 @@ public class CarManager : MonoBehaviour
         {
             for (int i = 0; i < 5; i++)
             {
-                var car = ObjectPool.Instance.GetPooledObject("Car", transform);
+                Car car = ObjectPool.Instance.GetPooledObject<Car>(transform);
                 _cars.Add(car);
                 yield return null;
             }

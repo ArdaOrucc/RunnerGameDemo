@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : PoolableObject
 {
     [SerializeField] private float speed;
     [SerializeField] private Animator animator;

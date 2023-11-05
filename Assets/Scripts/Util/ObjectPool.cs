@@ -1,22 +1,23 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable] 
-public class ObjectPoolItem
+[System.Serializable]
+public class ObjectPoolItem<T> where T : PoolableObject
 {
-    public PoolableObject objectToPool;
+    public T objectToPool;
     public int amountToPool;
     public bool shouldExpand;
 }
 
 public abstract class PoolableObject : MonoBehaviour
 {
-    public virtual void Init(Transform parent = null) 
+    public virtual void Init(Transform parent = null)
     {
         gameObject.SetActive(true);
     }
 
-    public virtual void Clear() 
+    public virtual void Clear()
     {
         transform.SetParent(ObjectPool.Instance.transform);
         gameObject.SetActive(false);
@@ -25,55 +26,65 @@ public abstract class PoolableObject : MonoBehaviour
     }
 }
 
-
 public class ObjectPool : Singleton<ObjectPool>
 {
-    public List<ObjectPoolItem> itemsToPool;
-    private List<PoolableObject> pooledObjects;
+    public List<ObjectPoolItem<PoolableObject>> itemsToPool;
+    private Dictionary<Type, List<PoolableObject>> pooledObjects;
 
     protected override void Init()
     {
         base.Init();
-        pooledObjects = new List<PoolableObject>();
+        pooledObjects = new Dictionary<Type, List<PoolableObject>>();
         foreach (var item in itemsToPool)
         {
             for (int i = 0; i < item.amountToPool; i++)
             {
-                var obj = CrateAndAddPool(item);
+                CreateAndAddPool(item.objectToPool);
             }
         }
     }
 
-    public PoolableObject GetPooledObject(string tag, Transform parent = null)
+    public T GetPooledObject<T>(Transform parent = null) where T : PoolableObject
     {
-        foreach (var pooledObject in pooledObjects)
+        var objectType = typeof(T);
+        if (pooledObjects.TryGetValue(objectType, out var o))
         {
-            if (!pooledObject.gameObject.activeSelf && pooledObject.gameObject.CompareTag(tag))
+            foreach (var pooledObject in o)
             {
-                pooledObject.Init(parent);
-                return pooledObject;
+                if (!pooledObject.gameObject.activeSelf)
+                {
+                    pooledObject.Init(parent);
+                    return (T)pooledObject;
+                }
             }
         }
 
         foreach (var item in itemsToPool)
         {
-            if (item.objectToPool.CompareTag(tag) && item.shouldExpand)
+            if (item.objectToPool.GetType() == objectType && item.shouldExpand)
             {
-                var obj = CrateAndAddPool(item);
+                var obj = CreateAndAddPool(item.objectToPool);
                 obj.Init(parent);
-                return obj;
+                return (T)obj;
             }
         }
 
         return null;
     }
 
-    private PoolableObject CrateAndAddPool(ObjectPoolItem item)
+    private T CreateAndAddPool<T>(T objectToPool) where T : PoolableObject
     {
-        var obj = Instantiate(item.objectToPool);
+        var obj = Instantiate(objectToPool);
         obj.transform.SetParent(transform);
         obj.gameObject.SetActive(false);
-        pooledObjects.Add(obj);
+
+        if (!pooledObjects.ContainsKey(obj.GetType()))
+        {
+            pooledObjects[obj.GetType()] = new List<PoolableObject>();
+        }
+
+        pooledObjects[obj.GetType()].Add(obj);
+
         return obj;
     }
 }
