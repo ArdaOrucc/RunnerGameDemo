@@ -29,7 +29,8 @@ public class GateManager : MonoBehaviour
     {
         for (int i = 0; i < _spawnAmount; i++)
         {
-            var gate = gateFactory.CreateGate(gateParent);
+            var gateState = _currentLevelData.GateStates[i];
+            var gate = gateFactory.CreateGate(gateParent, gateState);
             gate.transform.position = _currentLevelData.GateSpawnPoses[i].position;
             _gates[i] = gate;
         }

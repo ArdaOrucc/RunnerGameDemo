@@ -103,7 +103,17 @@ PrefabInstance:
     - target: {fileID: 1287005458789970824, guid: 0fdf639003dcd4817b7badfac795934f,
         type: 3}
       propertyPath: m_Name
-      value: Level_1
+      value: Level_1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287005458789970830, guid: 0fdf639003dcd4817b7badfac795934f,
+        type: 3}
+      propertyPath: gateStates.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287005458789970830, guid: 0fdf639003dcd4817b7badfac795934f,
+        type: 3}
+      propertyPath: gateStates.Array.data[1]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1287005458789970830, guid: 0fdf639003dcd4817b7badfac795934f,
         type: 3}

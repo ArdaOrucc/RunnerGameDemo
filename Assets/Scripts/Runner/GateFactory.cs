@@ -9,8 +9,11 @@ public class GateFactory : MonoBehaviour
         _objectPool = ObjectPool.Instance;
     }
 
-    public Gate CreateGate(Transform parent)
+    public Gate CreateGate(Transform parent, bool gateState)
     {
-        return _objectPool.GetPooledObject<Gate>(parent);
+        var gate = _objectPool.GetPooledObject<Gate>(parent);
+        gate.IsGoodGate = gateState;
+        gate.Init(parent);
+        return gate;
     }
 }

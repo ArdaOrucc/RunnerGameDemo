@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ca32341bd1241bfb06af9b27fc2867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 1092018457265090826}
+  goodColor: {r: 0.25207198, g: 1, b: 0, a: 1}
+  badColor: {r: 1, g: 0, b: 0, a: 1}
   IsGoodGate: 0
 --- !u!65 &4494205505018234138
 BoxCollider:
@@ -122,6 +125,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8068073526183931155, guid: 08a0e12db2afd4c92b6c7a94d48229c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2383901858227760921, guid: 08a0e12db2afd4c92b6c7a94d48229c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08a0e12db2afd4c92b6c7a94d48229c3,
         type: 3}
       propertyPath: m_Name
@@ -132,6 +145,12 @@ PrefabInstance:
 --- !u!4 &973298497554190602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08a0e12db2afd4c92b6c7a94d48229c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 723778469214746337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1092018457265090826 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8850486212190124053, guid: 08a0e12db2afd4c92b6c7a94d48229c3,
     type: 3}
   m_PrefabInstance: {fileID: 723778469214746337}
   m_PrefabAsset: {fileID: 0}
