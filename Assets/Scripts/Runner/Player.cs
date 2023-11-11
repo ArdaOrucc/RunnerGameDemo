@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : PoolableObject
@@ -26,6 +27,14 @@ public class Player : PoolableObject
     {
         _inputHandler.PointerUpdate();
         MoveForward();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Gate gate))
+        {
+            var isGoodGate =  gate.GetGateStatus();
+        }
     }
 
     private void StartRunning()

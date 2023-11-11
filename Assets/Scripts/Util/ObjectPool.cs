@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class ObjectPoolItem<T> where T : PoolableObject
+
+[System.Serializable] public class ObjectPoolItem<T> where T : PoolableObject
 {
     public T objectToPool;
     public int amountToPool;
     public bool shouldExpand;
 }
+
 
 public abstract class PoolableObject : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public abstract class PoolableObject : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+
 
     public virtual void Clear()
     {
@@ -26,10 +28,12 @@ public abstract class PoolableObject : MonoBehaviour
     }
 }
 
+
 public class ObjectPool : Singleton<ObjectPool>
 {
     public List<ObjectPoolItem<PoolableObject>> itemsToPool;
     private Dictionary<Type, List<PoolableObject>> pooledObjects;
+
 
     protected override void Init()
     {
@@ -39,22 +43,23 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             for (int i = 0; i < item.amountToPool; i++)
             {
-                CreateAndAddPool(item.objectToPool);
+                CrateAndAddPool(item.objectToPool);
             }
         }
     }
 
+
     public T GetPooledObject<T>(Transform parent = null) where T : PoolableObject
     {
         var objectType = typeof(T);
-        if (pooledObjects.TryGetValue(objectType, out var o))
+        if (pooledObjects.TryGetValue(objectType, out var typeList))
         {
-            foreach (var pooledObject in o)
+            foreach (var poolableObject in typeList)
             {
-                if (!pooledObject.gameObject.activeSelf)
+                if (poolableObject.gameObject.activeSelf)
                 {
-                    pooledObject.Init(parent);
-                    return (T)pooledObject;
+                    poolableObject.Init(parent);
+                    return (T)poolableObject;
                 }
             }
         }
@@ -63,8 +68,8 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             if (item.objectToPool.GetType() == objectType && item.shouldExpand)
             {
-                var obj = CreateAndAddPool(item.objectToPool);
-                obj.Init(parent);
+                var obj = CrateAndAddPool(item.objectToPool);
+                obj.Init();
                 return (T)obj;
             }
         }
@@ -72,19 +77,17 @@ public class ObjectPool : Singleton<ObjectPool>
         return null;
     }
 
-    private T CreateAndAddPool<T>(T objectToPool) where T : PoolableObject
+
+    private T CrateAndAddPool<T>(T item) where T : PoolableObject
     {
-        var obj = Instantiate(objectToPool);
+        var obj = Instantiate(item);
         obj.transform.SetParent(transform);
         obj.gameObject.SetActive(false);
-
         if (!pooledObjects.ContainsKey(obj.GetType()))
         {
-            pooledObjects[obj.GetType()] = new List<PoolableObject>();
+            pooledObjects[item.GetType()] = new List<PoolableObject>();
         }
-
-        pooledObjects[obj.GetType()].Add(obj);
-
+        pooledObjects[item.GetType()].Add(item);
         return obj;
     }
 }

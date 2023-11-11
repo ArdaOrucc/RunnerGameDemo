@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CarManager : MonoBehaviour
 {
-    private List<PoolableObject> _cars = new List<PoolableObject>();
+    private List<Car> _cars = new List<Car>();
         
     private void Start()
     {
@@ -17,8 +17,8 @@ public class CarManager : MonoBehaviour
         {
             for (int i = 0; i < 5; i++)
             {
-                Car car = ObjectPool.Instance.GetPooledObject<Car>(transform);
-                _cars.Add(car);
+                //Car car = ObjectPool.Instance.GetPooledObject<Car>(transform);
+                //_cars.Add(car);
                 yield return null;
             }
 

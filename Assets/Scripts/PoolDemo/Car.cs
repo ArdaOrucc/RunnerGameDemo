@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Car : PoolableObject
@@ -7,7 +8,9 @@ public class Car : PoolableObject
    public override void Init(Transform parent = null)
    {
       base.Init(parent);
-      a = 10;  
+      a = 10;
+
+      List<int> myList = new List<int>();
    }
 
    public override void Clear()
@@ -16,3 +19,4 @@ public class Car : PoolableObject
       a = 5;
    }
 }
+
