@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aff6acafa7a948aba48692d2f6738d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 3439264613585905290}
   speed: 5
   animator: {fileID: 2998070995085410536}
   xClamp: 2
@@ -295,6 +296,12 @@ PrefabInstance:
 --- !u!95 &2998070995085410536 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0f0076202da7e44d2935270510ade406,
+    type: 3}
+  m_PrefabInstance: {fileID: 8714988674325380473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3439264613585905290 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2933139716659438605, guid: 0f0076202da7e44d2935270510ade406,
     type: 3}
   m_PrefabInstance: {fileID: 8714988674325380473}
   m_PrefabAsset: {fileID: 0}
