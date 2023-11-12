@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GateManager : MonoBehaviour
@@ -20,6 +21,20 @@ public class GateManager : MonoBehaviour
         SpawnGates();
         
         ServiceProvider.GetService<GameManager>().DebugDemo();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) //save
+        {
+            DataHandler.Save(_currentLevelData, DataHandler.LevelDataKey);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            var json = DataHandler.GetJsonData(DataHandler.LevelDataKey);
+            Debug.Log(json);
+        }
     }
 
     private void GetLevelData()

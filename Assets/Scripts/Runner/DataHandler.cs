@@ -4,6 +4,7 @@ public static class DataHandler
 {
     public const string LevelIndexKey = "LevelIndexKey";
     public const string CurrencyAmountKey = "CurrencyAmountKey";
+    public const string LevelDataKey = "LevelDataKey";
 
     public static int LevelIndex
     {
