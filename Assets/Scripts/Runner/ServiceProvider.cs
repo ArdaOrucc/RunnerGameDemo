@@ -26,7 +26,12 @@ public static class ServiceProvider
     {
         if (ServiceDictionary.ContainsKey(typeof(T)))
         {
+            Debug.Log($"<color=green> Service {typeof(T)} is successfully unregistered </color>");
             ServiceDictionary.Remove(typeof(T));
+        }
+        else
+        {
+            Debug.LogWarning($"<color=yellow> Service {typeof(T)} is not registered, so can't register </color>");
         }
     }
 
