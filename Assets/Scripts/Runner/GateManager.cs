@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GateManager : MonoBehaviour
 {
-    [SerializeField] private LevelData[] levelDatas;
+    [SerializeField] private LevelDataListSo levelDataListSo;
     [SerializeField] private GateFactory gateFactory;
     [SerializeField] private Transform gateParent;
     private LevelData _currentLevelData;
@@ -24,16 +24,16 @@ public class GateManager : MonoBehaviour
 
     private void GetLevelData()
     {
-        _currentLevelData = levelDatas[0];
+        _currentLevelData = levelDataListSo.Levels[0];
     }
 
     private void SpawnGates()
     {
         for (int i = 0; i < _spawnAmount; i++)
         {
-            var gateState = _currentLevelData.GateStates[i];
+            var gateState = _currentLevelData.GateDatas[i].State;
             var gate = gateFactory.CreateGate(gateParent, gateState);
-            gate.transform.position = _currentLevelData.GateSpawnPoses[i].position;
+            gate.transform.position = _currentLevelData.GateDatas[i].Position;
             _gates[i] = gate;
         }
     }

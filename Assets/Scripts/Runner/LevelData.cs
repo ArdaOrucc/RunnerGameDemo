@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class LevelData : MonoBehaviour
+[System.Serializable] public class LevelData
 {
-    [SerializeField] private bool[] gateStates;
-    [SerializeField] private Transform[] gateSpawnPoses;
-    
-    public int SpawnAmount => GateSpawnPoses.Length;
-    
-    public Transform[] GateSpawnPoses => gateSpawnPoses;
-    public bool[] GateStates => gateStates;
-    
+    public GateData[] GateDatas;
+    public int SpawnAmount => GateDatas.Length;
 }
+
+[System.Serializable] public struct GateData
+{
+    public Vector3 Position;
+    public bool State;
+}
+
+

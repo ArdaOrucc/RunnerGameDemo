@@ -167,8 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a1c47a9028741a29af21fbf87114df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDatas:
-  - {fileID: 6970981611540624015, guid: 79921895e45e144699b162d3d5c292d7, type: 3}
+  levelDataListSo: {fileID: 11400000, guid: 2facb7d339e724ffdacc41d9c648c88f, type: 2}
   gateFactory: {fileID: 1810474332}
   gateParent: {fileID: 517143280}
 --- !u!1 &410087039

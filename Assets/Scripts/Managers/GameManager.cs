@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour, IService
 
     private void Awake()
     {
-        //ServiceProvider.Register(this);
+        ServiceProvider.Register(this);
     }
 
     private void OnDestroy()
