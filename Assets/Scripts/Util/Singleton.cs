@@ -6,13 +6,13 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         get
         {
-            if (_instance != null) //+1
+            if (_instance != null)
             {
                 return _instance;
             }
             else 
             {
-                _instance = FindObjectOfType(typeof(T)) as T; //+2
+                _instance = FindObjectOfType(typeof(T)) as T;
                 return _instance;
             }
         }
