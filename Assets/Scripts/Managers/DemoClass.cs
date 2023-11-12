@@ -1,9 +1,9 @@
+using System;
 using UnityEngine;
 
 public class DemoClass : MonoBehaviour
 {
-    void Awake()
+    private void Start()
     {
-        GameManager.Instance.DebugDemo();
     }
 }

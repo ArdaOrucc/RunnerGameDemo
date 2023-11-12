@@ -18,6 +18,8 @@ public class GateManager : MonoBehaviour
         _gates = new Gate[_spawnAmount];
         
         SpawnGates();
+        
+        ServiceProvider.GetService<GameManager>().DebugDemo();
     }
 
     private void GetLevelData()

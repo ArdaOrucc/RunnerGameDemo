@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public interface IService { } 
+public interface IService { }
 
 public static class ServiceProvider 
 {
@@ -22,7 +22,7 @@ public static class ServiceProvider
         }
     }
 
-    public static void Unregister<T>(T service) where T : class , IService
+    public static void Unregister<T>() where T : class , IService
     {
         if (ServiceDictionary.ContainsKey(typeof(T)))
         {

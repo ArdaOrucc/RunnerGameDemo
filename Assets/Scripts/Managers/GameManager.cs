@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum GameStates
@@ -8,7 +7,7 @@ public enum GameStates
     Fail
 }
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour, IService
 {
     private GameStates _gameStates;
     public GameStates GameStates
@@ -19,6 +18,16 @@ public class GameManager : Singleton<GameManager>
             _gameStates = value;
             ActionManager.OnGameStateChanged?.Invoke(_gameStates);
         }
+    }
+
+    private void Awake()
+    {
+        //ServiceProvider.Register(this);
+    }
+
+    private void OnDestroy()
+    {
+        ServiceProvider.Unregister<GameManager>();
     }
 
     public void DebugDemo()
