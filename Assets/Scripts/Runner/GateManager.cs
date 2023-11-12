@@ -24,7 +24,8 @@ public class GateManager : MonoBehaviour
 
     private void GetLevelData()
     {
-        _currentLevelData = levelDataListSo.Levels[0];
+        var levelIndex = DataHandler.LevelIndex % levelDataListSo.Levels.Length;
+        _currentLevelData = levelDataListSo.Levels[levelIndex];
     }
 
     private void SpawnGates()
